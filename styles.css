@@ -1,31 +1,56 @@
 /* ==========================================
    CSS VARIABLES & DESIGN SYSTEM
-   TODO: Complete the design system with all variables
    ========================================== */
 
 :root {
-  /* Color System - TODO: Add more color variations */
+  /* Color System */
   --color-primary: #667eea;
   --color-primary-dark: #5a67d8;
+  --color-secondary: #48bb78;
+  --color-accent: #f6ad55;
+
   --color-text-primary: #2d3748;
+  --color-text-secondary: #718096;
   --color-background: #ffffff;
   --color-surface: #f7fafc;
+  --color-border: #e2e8f0;
 
-  /* Spacing System - TODO: Use consistently throughout */
+  /* Spacing System */
+  --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
 
-  /* Animation Timing - TODO: Add more timing variations */
+  /* Typography */
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+
+  /* Animation Timing */
+  --transition-fast: 150ms;
   --transition-base: 250ms;
+  --transition-slow: 350ms;
+  --transition-slower: 500ms;
+
+  /* Easing Functions */
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* Dark Theme - TODO: Complete dark theme variables */
+/* Dark Theme Variables */
 [data-theme="dark"] {
   --color-text-primary: #f7fafc;
+  --color-text-secondary: #cbd5e0;
   --color-background: #1a202c;
   --color-surface: #2d3748;
+  --color-border: #4a5568;
 }
 
 /* ==========================================
@@ -43,7 +68,17 @@ body {
   line-height: 1.6;
   color: var(--color-text-primary);
   background: var(--color-background);
-  /* TODO: Add smooth transition for theme switching */
+  transition: background-color var(--transition-slow),
+              color var(--transition-slow);
+}
+
+/* Surfaces with their own background fade with the theme too */
+.navbar,
+.footer,
+.skill-card,
+.image-placeholder {
+  transition: background-color var(--transition-slow),
+              color var(--transition-slow);
 }
 
 .container {
@@ -54,7 +89,6 @@ body {
 
 /* ==========================================
    THEME TOGGLE
-   TODO: Add rotation animation on click
    ========================================== */
 
 .theme-toggle {
@@ -68,8 +102,23 @@ body {
   border: 2px solid var(--color-primary);
   cursor: pointer;
   z-index: 1000;
-  font-size: 1.5rem;
-  /* TODO: Add hover effect and transition */
+  font-size: var(--font-size-2xl);
+  transition: transform var(--transition-base),
+              border-color var(--transition-base),
+              background-color var(--transition-slow);
+}
+
+.theme-toggle:hover {
+  transform: rotate(180deg);
+  border-color: var(--color-primary);
+}
+
+@keyframes spin-once {
+  to { transform: rotate(360deg); }
+}
+
+.theme-toggle.spinning {
+  animation: spin-once var(--transition-slow) var(--ease-in-out);
 }
 
 /* Hide moon in light mode, sun in dark mode */
@@ -83,7 +132,6 @@ body {
 
 /* ==========================================
    NAVIGATION
-   TODO: Add underline animation for links
    ========================================== */
 
 .navbar {
@@ -119,12 +167,31 @@ body {
   color: var(--color-text-primary);
   text-decoration: none;
   position: relative;
-  /* TODO: Add hover effect with underline animation */
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width var(--transition-base) var(--ease-out);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
 }
 
 /* ==========================================
    HERO SECTION
-   TODO: Add typing animation for title
    ========================================== */
 
 .hero {
@@ -133,16 +200,33 @@ body {
   align-items: center;
   justify-content: center;
   padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Keep the hero content above the floating shapes */
+.hero .container {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-title {
   font-size: 3rem;
   margin-bottom: var(--spacing-md);
-  /* TODO: Add typing animation */
+  /* fit-content puts the cursor at the end of the text, not the end of the container */
+  width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--color-primary);
+  animation:
+    typing 3s steps(30, end),
+    blink 0.5s step-end infinite;
+  animation-delay: 0.5s;
+  animation-fill-mode: both;
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
+  font-size: var(--font-size-xl);
   margin-bottom: var(--spacing-lg);
   opacity: 0.8;
 }
@@ -152,20 +236,33 @@ body {
   gap: var(--spacing-md);
 }
 
+.floating-shape {
+  position: absolute;
+  opacity: 0.1;
+  animation: float 6s var(--ease-in-out) infinite;
+}
+
+.floating-shape:nth-child(1) { animation-delay: 0s; }
+.floating-shape:nth-child(2) { animation-delay: 2s; }
+.floating-shape:nth-child(3) { animation-delay: 4s; }
+
 /* ==========================================
    BUTTONS
-   TODO: Add hover and active states with transforms
    ========================================== */
 
 .btn {
-  padding: 0.75rem 2rem;
+  padding: 0.75rem var(--spacing-lg);
   border: none;
   border-radius: 0.375rem;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   text-decoration: none;
   display: inline-block;
-  /* TODO: Add transition for smooth hover effects */
+  transition: transform var(--transition-base) var(--ease-in-out),
+              box-shadow var(--transition-base) var(--ease-in-out),
+              background-color var(--transition-base),
+              color var(--transition-base);
+  transform: translateY(0);
 }
 
 .btn-primary {
@@ -179,7 +276,21 @@ body {
   border: 2px solid var(--color-primary);
 }
 
-/* TODO: Add hover states with transform and shadow */
+.btn:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* The secondary button's text would vanish on the dark hover background */
+.btn-secondary:hover {
+  color: white;
+}
+
+.btn:active {
+  transform: translateY(0);
+  transition-duration: var(--transition-fast);
+}
 
 /* ==========================================
    SECTIONS
@@ -192,7 +303,7 @@ section {
 .section-title {
   font-size: 2.5rem;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: var(--spacing-xl);
   color: var(--color-primary);
 }
 
@@ -214,12 +325,18 @@ section {
   align-items: center;
   justify-content: center;
   border-radius: 0.5rem;
-  /* TODO: Add hover effect */
+  transition: transform var(--transition-base) var(--ease-out),
+              box-shadow var(--transition-base) var(--ease-out),
+              background-color var(--transition-slow);
+}
+
+.image-placeholder:hover {
+  transform: scale(1.03) rotate(-1deg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* ==========================================
    PROJECTS SECTION
-   TODO: Add card hover animations
    ========================================== */
 
 .projects-grid {
@@ -230,9 +347,20 @@ section {
 
 .project-card {
   background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 0.5rem;
   overflow: hidden;
-  /* TODO: Add hover transform and shadow */
+  transition: transform var(--transition-base) var(--ease-out),
+              box-shadow var(--transition-base) var(--ease-out),
+              border-color var(--transition-base),
+              background-color var(--transition-slow);
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-primary);
 }
 
 .project-image {
@@ -242,7 +370,7 @@ section {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
 }
 
 .image-wrapper {
@@ -250,8 +378,20 @@ section {
   overflow: hidden;
 }
 
-.image-overlay {
-  /* TODO: Add overlay effect on hover */
+.project-card .image-wrapper {
+  border-radius: 0.375rem;
+}
+
+.project-card .image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.project-card:hover .image-overlay {
+  opacity: 1;
 }
 
 .project-card h3 {
@@ -273,14 +413,76 @@ section {
 .tag {
   background: var(--color-primary);
   color: white;
-  padding: 0.25rem 0.5rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: 0.25rem;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
+}
+
+/* 3D flip card (Tier 2) */
+.flip-card {
+  perspective: 1000px;
+  overflow: visible;
+  background: transparent;
+  border: none;
+}
+
+/* The flip replaces the scale, and the faces carry the border */
+.flip-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.flip-inner {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--transition-slower) var(--ease-in-out);
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: background-color var(--transition-slow);
+}
+
+.flip-front {
+  height: 100%;
+}
+
+.flip-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  border-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+}
+
+.flip-back h3,
+.flip-back p {
+  padding: 0;
+}
+
+.flip-links {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
 }
 
 /* ==========================================
    SKILLS SECTION
-   TODO: Add card entrance animations
    ========================================== */
 
 .skills-grid {
@@ -294,12 +496,24 @@ section {
   padding: var(--spacing-lg);
   border-radius: 0.5rem;
   text-align: center;
-  /* TODO: Add hover effect */
+  transition: transform var(--transition-base) var(--ease-out),
+              box-shadow var(--transition-base) var(--ease-out),
+              background-color var(--transition-slow);
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .skill-icon {
   font-size: 3rem;
   margin-bottom: var(--spacing-md);
+  transition: transform var(--transition-slow) var(--ease-bounce);
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.2);
 }
 
 .skill-card ul {
@@ -308,7 +522,7 @@ section {
 }
 
 .skill-card li {
-  padding: 0.25rem 0;
+  padding: var(--spacing-xs) 0;
 }
 
 /* ==========================================
@@ -342,38 +556,199 @@ section {
   margin-top: 5rem;
 }
 
+.footer a {
+  color: var(--color-primary);
+}
+
 /* ==========================================
    ANIMATIONS
-   TODO: Create keyframe animations
    ========================================== */
 
-/* TODO: Add fadeInUp animation */
 @keyframes fadeInUp {
-  /* Your implementation here */
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* TODO: Add typing animation */
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Staggered animation for grid children */
+@keyframes fadeInStagger {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* max-width rather than width, so the title keeps its fit-content width */
 @keyframes typing {
-  /* Your implementation here */
+  from { max-width: 0; }
+  to { max-width: 100%; }
 }
 
-/* TODO: Add float animation for background elements */
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(-2deg);
+  }
+  66% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+}
 
 /* ==========================================
    UTILITY CLASSES
    ========================================== */
 
 .animate-on-scroll {
-  /* TODO: Set initial state for scroll animations */
+  opacity: 0;
 }
 
 .animate-on-scroll.visible {
-  /* TODO: Apply animation when visible */
+  animation: fadeInUp var(--transition-slower) var(--ease-out) forwards;
 }
 
-/* Staggered animations */
+/* Grid children start hidden and fade in one after another once the grid is visible */
 .stagger-children > * {
-  /* TODO: Add staggered delay for children */
+  opacity: 0;
+}
+
+.stagger-children.visible > * {
+  animation: fadeInStagger var(--transition-slow) var(--ease-out) forwards;
+}
+
+.stagger-children.visible > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children.visible > *:nth-child(2) { animation-delay: 100ms; }
+.stagger-children.visible > *:nth-child(3) { animation-delay: 200ms; }
+.stagger-children.visible > *:nth-child(4) { animation-delay: 300ms; }
+.stagger-children.visible > *:nth-child(5) { animation-delay: 400ms; }
+.stagger-children.visible > *:nth-child(6) { animation-delay: 500ms; }
+
+/* ==========================================
+   STYLE GUIDE PAGE (Tier 3)
+   ========================================== */
+
+.sg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg) 0;
+  padding-right: 70px; /* room for the fixed theme toggle */
+}
+
+.sg-header a {
+  color: var(--color-primary);
+}
+
+.sg-section {
+  padding: var(--spacing-lg) 0;
+}
+
+.sg-section h2 {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.sg-list {
+  list-style: none;
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.sg-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 220px;
+  gap: var(--spacing-md);
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+  transition: background-color var(--transition-slow);
+}
+
+.sg-name {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: var(--font-size-sm);
+}
+
+.sg-value {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.sg-swatch {
+  width: 48px;
+  height: 32px;
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-border);
+}
+
+.sg-bar {
+  height: 12px;
+  background: var(--color-primary);
+  border-radius: 2px;
+}
+
+/* Side margins leave room for --ease-bounce to overshoot */
+.sg-track {
+  position: relative;
+  height: 24px;
+  margin: 0 15%;
+}
+
+.sg-box {
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 0.25rem;
+  background: var(--color-primary);
+  transition-property: left;
+}
+
+.sg-track.moved .sg-box {
+  left: calc(100% - 24px);
+}
+
+/* ==========================================
+   REDUCED MOTION (Tier 1)
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .animate-on-scroll,
+  .stagger-children > * {
+    opacity: 1;
+  }
+
+  .hero-title {
+    border-right: none;
+  }
 }
 
 /* ==========================================
@@ -396,7 +771,7 @@ section {
   }
 
   .hero-title {
-    font-size: 2rem;
+    font-size: var(--font-size-3xl);
   }
 
   .projects-grid,
@@ -407,5 +782,9 @@ section {
   .contact-buttons {
     flex-direction: column;
     align-items: center;
+  }
+
+  .sg-row {
+    grid-template-columns: 1fr;
   }
 }

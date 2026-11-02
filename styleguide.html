@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Guide - My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Theme Toggle Button (same as index.html, wired by script.js) -->
+    <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+
+    <div class="container">
+        <header class="sg-header">
+            <h1>Style Guide</h1>
+            <a href="index.html">&larr; Back to portfolio</a>
+        </header>
+
+        <p>Every design token in the <code>:root</code> block of <code>styles.css</code>, read live from the stylesheet. Values update when you toggle the theme.</p>
+
+        <!-- styleguide.js fills each list -->
+        <section class="sg-section">
+            <h2>Colors</h2>
+            <ul class="sg-list" id="sg-colors"></ul>
+        </section>
+
+        <section class="sg-section">
+            <h2>Spacing</h2>
+            <ul class="sg-list" id="sg-spacing"></ul>
+        </section>
+
+        <section class="sg-section">
+            <h2>Typography</h2>
+            <ul class="sg-list" id="sg-type"></ul>
+        </section>
+
+        <section class="sg-section">
+            <h2>Animation Timing</h2>
+            <ul class="sg-list" id="sg-timing"></ul>
+        </section>
+
+        <section class="sg-section">
+            <h2>Easing Functions</h2>
+            <ul class="sg-list" id="sg-easing"></ul>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p><a href="index.html">Back to portfolio</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="styleguide.js"></script>
+</body>
+</html>
