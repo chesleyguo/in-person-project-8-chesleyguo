@@ -1,0 +1,411 @@
+/* ==========================================
+   CSS VARIABLES & DESIGN SYSTEM
+   TODO: Complete the design system with all variables
+   ========================================== */
+
+:root {
+  /* Color System - TODO: Add more color variations */
+  --color-primary: #667eea;
+  --color-primary-dark: #5a67d8;
+  --color-text-primary: #2d3748;
+  --color-background: #ffffff;
+  --color-surface: #f7fafc;
+
+  /* Spacing System - TODO: Use consistently throughout */
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+
+  /* Animation Timing - TODO: Add more timing variations */
+  --transition-base: 250ms;
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Theme - TODO: Complete dark theme variables */
+[data-theme="dark"] {
+  --color-text-primary: #f7fafc;
+  --color-background: #1a202c;
+  --color-surface: #2d3748;
+}
+
+/* ==========================================
+   BASE STYLES
+   ========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background: var(--color-background);
+  /* TODO: Add smooth transition for theme switching */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* ==========================================
+   THEME TOGGLE
+   TODO: Add rotation animation on click
+   ========================================== */
+
+.theme-toggle {
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-primary);
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 1.5rem;
+  /* TODO: Add hover effect and transition */
+}
+
+/* Hide moon in light mode, sun in dark mode */
+[data-theme="light"] .moon-icon {
+  display: none;
+}
+
+[data-theme="dark"] .sun-icon {
+  display: none;
+}
+
+/* ==========================================
+   NAVIGATION
+   TODO: Add underline animation for links
+   ========================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--color-background);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 100;
+  padding: var(--spacing-md) 0;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand h2 {
+  color: var(--color-primary);
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-lg);
+}
+
+.nav-link {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  position: relative;
+  /* TODO: Add hover effect with underline animation */
+}
+
+/* ==========================================
+   HERO SECTION
+   TODO: Add typing animation for title
+   ========================================== */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+  /* TODO: Add typing animation */
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.8;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+/* ==========================================
+   BUTTONS
+   TODO: Add hover and active states with transforms
+   ========================================== */
+
+.btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  /* TODO: Add transition for smooth hover effects */
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+/* TODO: Add hover states with transform and shadow */
+
+/* ==========================================
+   SECTIONS
+   ========================================== */
+
+section {
+  padding: 5rem 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--color-primary);
+}
+
+/* ==========================================
+   ABOUT SECTION
+   ========================================== */
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.image-placeholder {
+  background: var(--color-surface);
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  /* TODO: Add hover effect */
+}
+
+/* ==========================================
+   PROJECTS SECTION
+   TODO: Add card hover animations
+   ========================================== */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.project-card {
+  background: var(--color-surface);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  /* TODO: Add hover transform and shadow */
+}
+
+.project-image {
+  height: 200px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-overlay {
+  /* TODO: Add overlay effect on hover */
+}
+
+.project-card h3 {
+  padding: var(--spacing-md) var(--spacing-md) 0;
+}
+
+.project-card p {
+  padding: var(--spacing-sm) var(--spacing-md);
+  opacity: 0.8;
+}
+
+.project-tags {
+  padding: 0 var(--spacing-md) var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* ==========================================
+   SKILLS SECTION
+   TODO: Add card entrance animations
+   ========================================== */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.skill-card {
+  background: var(--color-surface);
+  padding: var(--spacing-lg);
+  border-radius: 0.5rem;
+  text-align: center;
+  /* TODO: Add hover effect */
+}
+
+.skill-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.skill-card ul {
+  list-style: none;
+  margin-top: var(--spacing-md);
+}
+
+.skill-card li {
+  padding: 0.25rem 0;
+}
+
+/* ==========================================
+   CONTACT SECTION
+   ========================================== */
+
+.contact-section {
+  text-align: center;
+}
+
+.contact-subtitle {
+  max-width: 600px;
+  margin: 0 auto var(--spacing-lg);
+  opacity: 0.8;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.footer {
+  background: var(--color-surface);
+  padding: var(--spacing-lg) 0;
+  text-align: center;
+  margin-top: 5rem;
+}
+
+/* ==========================================
+   ANIMATIONS
+   TODO: Create keyframe animations
+   ========================================== */
+
+/* TODO: Add fadeInUp animation */
+@keyframes fadeInUp {
+  /* Your implementation here */
+}
+
+/* TODO: Add typing animation */
+@keyframes typing {
+  /* Your implementation here */
+}
+
+/* TODO: Add float animation for background elements */
+
+/* ==========================================
+   UTILITY CLASSES
+   ========================================== */
+
+.animate-on-scroll {
+  /* TODO: Set initial state for scroll animations */
+}
+
+.animate-on-scroll.visible {
+  /* TODO: Apply animation when visible */
+}
+
+/* Staggered animations */
+.stagger-children > * {
+  /* TODO: Add staggered delay for children */
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 768px) {
+  .nav-menu {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--color-background);
+    /* Add mobile menu styles */
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .projects-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}

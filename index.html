@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - Week 12 Enhanced</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" aria-label="Toggle theme">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>My Portfolio</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero animate-on-scroll">
+        <!-- TODO: Add floating shapes for background animation -->
+        <div class="container">
+            <h1 class="hero-title">Hi, I'm a Web Developer</h1>
+            <p class="hero-subtitle">Creating beautiful, interactive web experiences</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">View Projects</button>
+                <button class="btn btn-secondary">Download CV</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section animate-on-scroll">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm passionate about creating engaging web experiences that combine beautiful design with smooth functionality. With expertise in modern web technologies, I bring ideas to life through code.</p>
+                    <p>My journey in web development started with curiosity about how websites work, and has grown into a career focused on building accessible, performant, and delightful user interfaces.</p>
+                </div>
+                <div class="about-image">
+                    <!-- TODO: Add image with hover effect -->
+                    <div class="image-placeholder">Your Photo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section animate-on-scroll">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid stagger-children">
+                <!-- Project Card 1 -->
+                <div class="project-card">
+                    <div class="image-wrapper">
+                        <div class="project-image">Project 1</div>
+                        <div class="image-overlay"></div>
+                    </div>
+                    <h3>E-Commerce Platform</h3>
+                    <p>A full-stack e-commerce solution with React and Node.js</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card">
+                    <div class="image-wrapper">
+                        <div class="project-image">Project 2</div>
+                        <div class="image-overlay"></div>
+                    </div>
+                    <h3>Task Manager App</h3>
+                    <p>A responsive task management application with drag-and-drop</p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">LocalStorage</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card">
+                    <div class="image-wrapper">
+                        <div class="project-image">Project 3</div>
+                        <div class="image-overlay"></div>
+                    </div>
+                    <h3>Weather Dashboard</h3>
+                    <p>Real-time weather data visualization with animated charts</p>
+                    <div class="project-tags">
+                        <span class="tag">API Integration</span>
+                        <span class="tag">Chart.js</span>
+                        <span class="tag">Responsive</span>
+                    </div>
+                </div>
+
+                <!-- TODO: Add more project cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section animate-on-scroll">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid stagger-children">
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>Frontend</h3>
+                    <ul>
+                        <li>HTML5 & CSS3</li>
+                        <li>JavaScript ES6+</li>
+                        <li>React & Vue</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚙️</div>
+                    <h3>Backend</h3>
+                    <ul>
+                        <li>Node.js</li>
+                        <li>Express</li>
+                        <li>REST APIs</li>
+                        <li>Database Design</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🛠️</div>
+                    <h3>Tools</h3>
+                    <ul>
+                        <li>Git & GitHub</li>
+                        <li>VS Code</li>
+                        <li>npm/yarn</li>
+                        <li>Chrome DevTools</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section animate-on-scroll">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="contact-subtitle">I'm currently looking for new opportunities. Whether you have a question or just want to say hi, my inbox is always open!</p>
+            <div class="contact-buttons">
+                <a href="mailto:your@email.com" class="btn btn-primary">Send Email</a>
+                <a href="https://linkedin.com" class="btn btn-secondary">LinkedIn</a>
+                <a href="https://github.com" class="btn btn-secondary">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 My Portfolio. Built with HTML, CSS, and JavaScript.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
